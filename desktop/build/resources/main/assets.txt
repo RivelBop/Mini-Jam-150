@@ -1,0 +1,5 @@
+font.ttf
+libgdx.png
+player.atlas
+assets
+player.png

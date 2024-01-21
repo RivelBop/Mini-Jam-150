@@ -1,0 +1,7 @@
+ui.png
+size:256,32
+repeat:none
+button_default
+bounds:2,2,92,28
+button_pressed
+bounds:96,4,92,26
