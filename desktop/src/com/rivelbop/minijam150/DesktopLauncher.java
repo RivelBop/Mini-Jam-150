@@ -8,9 +8,10 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		Main main = new Main();
-		config.useVsync(true);
+		config.useVsync(true); 
 		config.setTitle("Long Lost Wizard");
-		config.setWindowedMode(Main.getWidth(), Main.getHeight());
+		//config.setWindowedMode(Main.getWidth(), Main.getHeight());
+		//config.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		new Lwjgl3Application(main, config);
 	}
 }

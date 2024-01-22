@@ -1,0 +1,9 @@
+wolf.png
+size:64,32
+repeat:none
+wolf
+index:1
+bounds:2,2,27,18
+wolf
+index:0
+bounds:31,2,27,18

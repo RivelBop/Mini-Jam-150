@@ -5,11 +5,13 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.math.Rectangle;
 import com.rivelbop.rivelgdx.graphics.AnimatedSprite;
+import com.rivelbop.rivelgdx.graphics.ParticleEmitter;
 
 public class Player {
 	public AnimatedSprite sprite;
 	public float speed;
-	private boolean isMoving;
+	public boolean isMoving;
+	public float walkParticleTimer; 
 	
 	private boolean topCollision, bottomCollision, leftCollision, rightCollision;
     public Rectangle topCollider, bottomCollider, leftCollider, rightCollider;
@@ -17,7 +19,7 @@ public class Player {
 	
 	public Player(float x, float y) {
 		sprite = new AnimatedSprite(x, y,"player.atlas", "idle", 0.06f, PlayMode.LOOP);
-		speed = 100f;
+		speed = 150f;
 		
 		topCollider = new Rectangle(getBounds().x, getBounds().y + getBounds().height, getBounds().width, COLLIDER_THICKNESS);
         bottomCollider = new Rectangle(getBounds().x, getBounds().y - COLLIDER_THICKNESS, getBounds().width, COLLIDER_THICKNESS);
@@ -28,6 +30,7 @@ public class Player {
 	public void update(Tile[][] tiles) {
 		isMoving = false;
         updateCollisions(tiles);
+        walkParticleTimer += Gdx.graphics.getDeltaTime();
         
 		if(Gdx.input.isKeyPressed(Keys.W) && !topCollision) {
 			sprite.translateY(speed * Gdx.graphics.getDeltaTime());
@@ -56,6 +59,8 @@ public class Player {
 		} else {
 			sprite.setAnimation("idle");
 		}	
+		
+		
 	}
 	
 	public void render() {
@@ -102,11 +107,14 @@ public class Player {
 		}
 	}
 	
+	
 	private boolean isColliding(Rectangle collider, Tile[][] walls, int gridX, int gridY, int dirX, int dirY) {
 		if(walls != null && gridX > -1 && gridY > -1 && gridY < walls.length && gridX < walls[gridY].length) {
 			if(gridX + dirX > -1 && gridY + dirY > -1 && gridY + dirY < walls.length && gridX + dirX < walls[gridY + dirY].length)
 			return walls[gridY + dirY][gridX + dirX] != null && walls[gridY + dirY][gridX + dirX].canCollide && collider.overlaps(walls[gridY + dirY][gridX + dirX].sprite.getBoundingRectangle());
 		}
 		return false;
+		
     }
+	
 }

@@ -3,6 +3,8 @@ antiquity-print.ttf
 cavemusic.mp3
 start.wav
 lvl1.map
+lvl2.map
+lvl3.map
 dirt.png
 wall.png
 spike.png
@@ -13,3 +15,8 @@ pickupTorch.wav
 placeTorch.wav
 fire.wav
 deathSound.wav
+wolf.atlas
+ghost.atlas
+dustparticle.p
+particle.png
+portal.png

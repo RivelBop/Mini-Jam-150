@@ -3,8 +3,6 @@ package com.rivelbop.minijam150;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
-import com.rivelbop.rivelgdx.graphics.ui.Button;
-import com.rivelbop.rivelgdx.graphics.ui.ButtonListener;
 import com.rivelbop.rivelgdx.graphics.ui.Font;
 import com.rivelbop.rivelgdx.math.FadeEffect;
 import com.rivelbop.rivelgdx.screen.Core;
@@ -16,16 +14,15 @@ public class DeathMenu extends Scene{
 	public Font deathText, spaceText; 
 	public FadeEffect startFade, spaceFade; 
 	public boolean isSpacePressed;
+	public int level;
 
-
-	public DeathMenu(Core core) {
+	public DeathMenu(Core core, int level) {
 		super(core);
-		// TODO Auto-generated constructor stub
+		this.level = level;
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		deathText = new Font("antiquity-print.ttf", 40, Color.RED);
 		spaceText = new Font("antiquity-print.ttf", 25,Color.YELLOW);
 		startFade = new FadeEffect(1f, false);
@@ -37,18 +34,18 @@ public class DeathMenu extends Scene{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+		if(Gdx.input.isKeyJustPressed(Keys.SPACE) && startFade.isComplete()) {
 			isSpacePressed = true;
+			Audio.playSound("start.wav", 1f, 1f);
 		}
 		
 		if(spaceFade.isComplete()) {
-			CORE.setScreen(new GameScene(CORE));
+			CORE.setScreen(new GameScene(CORE, level));
 		}
 	}
 
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
 		Main.uiBatch.begin();
 		deathText.renderCenter(Main.getWidth() / 2f, Main.getHeight() / 2f + 200f, "You Died");
 		spaceText.renderCenter(Main.getWidth() / 2f, Main.getHeight() / 2f - 100f, "Press Space To Retry");
@@ -64,7 +61,6 @@ public class DeathMenu extends Scene{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		deathText.dispose();
 		spaceText.dispose();
 		

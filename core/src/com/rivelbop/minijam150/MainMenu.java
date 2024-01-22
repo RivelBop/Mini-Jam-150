@@ -28,32 +28,25 @@ public class MainMenu extends Scene{
 		spaceFade = new FadeEffect(1f, true);
 		music = Audio.playMusic("cavemusic.mp3", 0.5f, true);
 		music.play();
-		int[][] map = TileMap.readToID("lvl1");
-		for(int[] y : map) {
-			for(int x : y) {
-				System.out.print(x + ", ");
-			}
-			System.out.println();
-		}
 	}
 
 	@Override
 	public void update() {
-		if(Gdx.input.isKeyJustPressed(Keys.SPACE) && startFade.isComplete()) {
+		if(!isSpacePressed && Gdx.input.isKeyJustPressed(Keys.SPACE) && startFade.isComplete()) {
 			isSpacePressed = true; 
 			Audio.playSound("start.wav", 1f, 1f);
 		}
 		
 		if(spaceFade.isComplete()) {
-			CORE.setScreen(new GameScene(CORE));
+			CORE.setScreen(new GameScene(CORE, 1));
 		}
 	}
 
 	@Override
 	public void render() {
 		Main.uiBatch.begin();
-		startUpText.renderCenter(Main.getWidth() / 2f, Main.getHeight() / 2f - 150f, "Press Space To Continue");
-		titleText.renderCenter(Main.getWidth() / 2f, Main.getHeight() / 2f + 100f, "Long Lost Wizard");
+		startUpText.renderCenter(Main.getWidth() / 2f, Main.getHeight() / 2f - 100f, "Press Space To Start");
+		titleText.renderCenter(Main.getWidth() / 2f, Main.getHeight() / 2f + 200f, "Long Lost Wizard");
 		Main.uiBatch.end();
 		
 		Main.shapeRenderer.begin();

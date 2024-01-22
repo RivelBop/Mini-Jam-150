@@ -5,14 +5,15 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.rivelbop.rivelgdx.graphics.AnimatedSprite;
 
 public class Wolf {
-	
 	public AnimatedSprite sprite;
-	public float move; 
-
+	public float move;
+	public boolean isMoving;
+	public float walkParticleTimer;
 	
-	public Wolf(float x, float y) {
-		sprite = new AnimatedSprite(0f, 0f, "wolf.atlas", "idle", 0.06f, PlayMode.LOOP);
-		sprite.setPosition(x, y);
+	public Wolf(int x, int y) {
+		sprite = new AnimatedSprite(0f, 0f, "wolf.atlas", "wolf", 0.2f, PlayMode.LOOP);
+		sprite.setCenter(x * Tile.SIZE + Tile.SIZE / 2f, y * Tile.SIZE + Tile.SIZE / 2f);
+		sprite.setScale(2f);
 	}
 	
 	public void render() {
@@ -21,16 +22,18 @@ public class Wolf {
 	
 	public void update() {
 		move += Gdx.graphics.getDeltaTime();
-		
+		walkParticleTimer += Gdx.graphics.getDeltaTime();
+		isMoving = false;
 		if(move < 1f) {
 			sprite.translateX(100 * Gdx.graphics.getDeltaTime());
-		}
-		else if(move > 1f && move < 2f) {
+			sprite.setFlip(false, false);
+			isMoving = true;
+		} else if(move < 2f) {
 			sprite.translateX(-100 * Gdx.graphics.getDeltaTime());
-		}
-		else
+			sprite.setFlip(true, false);
+			isMoving = true;
+		} else {
 			move = 0f; 
-		
-	}
-	
+		}
+	}	
 }
