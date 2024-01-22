@@ -145,9 +145,7 @@ public class GameScene extends Scene {
 		for(int y = 0; y < map.length; y++) {
 			for(int x = 0; x < map[y].length; x++) {
 				tiles[y][x] = Tile.TILES[map[y][x]].create(x * Tile.SIZE, y * Tile.SIZE);
-				System.out.print(map[y][x] + " ");
 			}
-			System.out.println();
 		}
 	}
 
@@ -260,9 +258,7 @@ public class GameScene extends Scene {
 		if(level < 4 && player.sprite.getBoundingRectangle().overlaps(portal.getBoundingRectangle())) {
 			level++;
 			CORE.setScreen(new GameScene(CORE, level));
-		}
-		
-		if(level == 4 && player.sprite.getBoundingRectangle().overlaps(portal.getBoundingRectangle())) {
+		} else if(level == 4 && player.sprite.getBoundingRectangle().overlaps(portal.getBoundingRectangle())) {
 			CORE.setScreen(new MainMenu(CORE));
 		}
 	}
