@@ -37,19 +37,20 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
         maven { url "https://jitpack.io" }
+        maven { url "https://artifactory.nimblygames.com/artifactory/ng-public-snapshot/" }
+        maven { url "https://artifactory.nimblygames.com/artifactory/ng-public-release/" }
     }
 }
 
 project(":desktop") {
     apply plugin: "java-library"
-
-
+	
     dependencies {
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
-        
+        implementation("com.badlogicgames.packr:packr:3.0.3")
     }
 }
 
@@ -60,6 +61,5 @@ project(":core") {
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        
     }
 }

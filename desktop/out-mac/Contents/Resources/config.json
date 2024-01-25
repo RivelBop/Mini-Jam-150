@@ -1,0 +1,11 @@
+{
+  "classPath": [
+    "desktop-1.0.jar"
+  ],
+  "mainClass": "com.rivelbop.minijam150.DesktopLauncher",
+  "useZgcIfSupportedOs": true,
+  "vmArgs": [
+    "-Xmx1G",
+    "-XstartOnFirstThread"
+  ]
+}
